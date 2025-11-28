@@ -484,93 +484,130 @@
     <p>HidraSeries &copy; 2025 – Mecanica de fluidos Proyect</p>
   </footer>
 
-  <template id="segment-row-template">
-    <tr class="segment-row">
-      <td class="row-index"></td>
-      <td>
-        <select class="material-select">
-          <option value="steel">Acero comercial</option>
-          <option value="pvc">PVC liso</option>
-          <option value="pvc">Polietileno</option>
-          <option value="pvc">Cobre</option>
-          <option value="pvc">Hierro fundido</option>
-          <option value="pvc">CPVC</option>
-          <option value="pvc">Acero inoxidable</option>
-          <option value="pvc">Aluminio</option>
-        </select>
-      </td>
-      <td>
-        <select class="diameter-mode">
-          <option value="schedule">Schedule 40</option>
-          <option value="schedule">Schedule 40</option>
-          <option value="schedule">Schedule 60</option>
-          <option value="schedule">Schedule 80</option>
-          <option value="direct">Diámetro directo</option>
-        </select>
-      </td>
-      <td>
-        <select class="nps-select">
-          <option value="0.125">1/8"</option>
-          <option value="0.25">1/4"</option>
-          <option value="0.375">3/8"</option>
-          <option value="0.5">1/2"</option>
-          <option value="0.75">3/4"</option>
-          <option value="1">1"</option>
-          <option value="1.25">1 1/4"</option>
-          <option value="1.5">1 1/2"</option>
-          
-          <option value="2" selected>2"</option>
-          <option value="2.5">2 1/2"</option>
-          <option value="3">3"</option>
-          <option value="4">4"</option>
-          <option value="6">6"</option>
-          <option value="8">8"</option>
-          <option value="10">10"</option>
-          <option value="12">12"</option>
-        </select>
-      </td>
-      <td>
-        <input class="diameter-input" type="number" step="0.0001" placeholder="D [m]" disabled />
-      </td>
-      <td>
-        <input class="length-input" type="number" step="0.01" placeholder="L [m]" />
-      </td>
-      <td>
-        <button type="button" class="btn-icon btn-remove-row" title="Eliminar tramo">&times;</button>
-      </td>
-    </tr>
-  </template>
+ <template id="segment-row-template">
+  <tr class="segment-row">
+    <td class="row-index"></td>
 
-  <template id="accessory-row-template">
-    <tr class="accessory-row">
-      <td class="row-index"></td>
-      <td>
-        <select class="accessory-type">
-          <option value="elbow90">Codo 90° estándar</option>
-          <option value="elbow45">Codo 45°</option>
-          <option value="tee_run">Tee (flujo en línea)</option>
-          <option value="tee_branch">Tee (derivación)</option>
-          <option value="globe_valve">Válvula globo (abierta)</option>
-          <option value="gate_valve">Válvula compuerta (abierta)</option>
-          <option value="sudden_contraction">Contracción súbita</option>
-          <option value="sudden_expansion">Expansión súbita</option>
-        </select>
-      </td>
-      <td>
-        <input class="accessory-count" type="number" step="1" min="1" value="1" />
-      </td>
-      <td>
-        <select class="accessory-segment">
-        </select>
-      </td>
-      <td>
-        <button type="button" class="btn-icon btn-remove-row" title="Eliminar accesorio">
-          &times;
-        </button>
-      </td>
-    </tr>
-  </template>
+    <!-- MATERIAL -->
+    <td>
+      <select class="material-select">
+        <option value="steel">Acero comercial</option>
+        <option value="pvc">PVC liso</option>
+        <option value="pe">Polietileno</option>
+        <option value="copper">Cobre</option>
+        <option value="castiron">Hierro fundido</option>
+        <option value="cpvc">CPVC</option>
+        <option value="stainless">Acero inoxidable</option>
+        <option value="aluminum">Aluminio</option>
+      </select>
+    </td>
 
-  <script src="app.js"></script>
+    <!-- MODO DE DIÁMETRO -->
+    <td>
+      <select class="diameter-mode">
+        <option value="schedule40">Schedule 40</option>
+        <option value="schedule60">Schedule 60</option>
+        <option value="schedule80">Schedule 80</option>
+        <option value="direct">Diámetro directo</option>
+      </select>
+    </td>
+
+    <!-- NPS -->
+    <td>
+      <select class="nps-select">
+        <option value="0.125">1/8"</option>
+        <option value="0.25">1/4"</option>
+        <option value="0.375">3/8"</option>
+        <option value="0.5">1/2"</option>
+        <option value="0.75">3/4"</option>
+        <option value="1">1"</option>
+        <option value="1.25">1 1/4"</option>
+        <option value="1.5">1 1/2"</option>
+        <option value="2" selected>2"</option>
+        <option value="2.5">2 1/2"</option>
+        <option value="3">3"</option>
+        <option value="4">4"</option>
+        <option value="6">6"</option>
+        <option value="8">8"</option>
+        <option value="10">10"</option>
+        <option value="12">12"</option>
+      </select>
+    </td>
+
+    <!-- DIÁMETRO DIRECTO -->
+    <td>
+      <input
+        class="diameter-input"
+        type="number"
+        step="0.0001"
+        placeholder="D [m]"
+        disabled
+      />
+    </td>
+
+    <!-- LONGITUD -->
+    <td>
+      <input
+        class="length-input"
+        type="number"
+        step="0.01"
+        placeholder="L [m]"
+      />
+    </td>
+
+    <!-- ELIMINAR TRAMO -->
+    <td>
+      <button
+        type="button"
+        class="btn-icon btn-remove-row"
+        title="Eliminar tramo"
+      >
+        &times;
+      </button>
+    </td>
+  </tr>
+</template>
+
+<template id="accessory-row-template">
+  <tr class="accessory-row">
+    <td class="row-index"></td>
+    <td>
+      <select class="accessory-type">
+        <option value="elbow90">Codo 90° estándar</option>
+        <option value="elbow45">Codo 45°</option>
+        <option value="tee_run">Tee (flujo en línea)</option>
+        <option value="tee_branch">Tee (derivación)</option>
+        <option value="globe_valve">Válvula globo (abierta)</option>
+        <option value="gate_valve">Válvula compuerta (abierta)</option>
+        <option value="sudden_contraction">Contracción súbita</option>
+        <option value="sudden_expansion">Expansión súbita</option>
+      </select>
+    </td>
+    <td>
+      <input
+        class="accessory-count"
+        type="number"
+        step="1"
+        min="1"
+        value="1"
+      />
+    </td>
+    <td>
+      <select class="accessory-segment"></select>
+    </td>
+    <td>
+      <button
+        type="button"
+        class="btn-icon btn-remove-row"
+        title="Eliminar accesorio"
+      >
+        &times;
+      </button>
+    </td>
+  </tr>
+</template>
+
+<!-- IMPORTANTE: si tu app.js usa import (Firebase, etc.), debe ir como módulo -->
+<script type="module" src="app.js"></script>
 </body>
 </html>
