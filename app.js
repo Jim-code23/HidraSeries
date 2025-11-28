@@ -581,6 +581,7 @@ function attachEventListeners() {
     });
   }
 
+
   // Delegación para eliminar filas
   document.addEventListener("click", (e) => {
     const target = e.target;
@@ -733,6 +734,57 @@ function attachEventListeners() {
 }
 
 // --- Arranque ---
+// --- Playlist de videos / Reproductor principal ---
+function initVideoPlaylist() {
+  const player = document.getElementById("mainVideoPlayer");
+  const items = Array.from(document.querySelectorAll("#videoPlaylist .video-item"));
+  const prevBtn = document.getElementById("prevVideoBtn");
+  const nextBtn = document.getElementById("nextVideoBtn");
+
+  if (!player || items.length === 0) return;
+
+  let currentIndex = 0;
+
+  function loadVideo(index, autoplay = false) {
+    const item = items[index];
+    if (!item) return;
+
+    const videoId = item.dataset.videoId;
+    const baseUrl = "https://www.youtube.com/embed/" + videoId;
+    const finalUrl = autoplay ? baseUrl + "?autoplay=1" : baseUrl;
+
+    player.src = finalUrl;
+
+    items.forEach(el => el.classList.remove("active"));
+    item.classList.add("active");
+    currentIndex = index;
+  }
+
+  // Click en cada item de la lista
+  items.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      loadVideo(index, true);
+    });
+  });
+
+  // Botones Anterior / Siguiente
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      const nextIndex = (currentIndex - 1 + items.length) % items.length;
+      loadVideo(nextIndex, true);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const nextIndex = (currentIndex + 1) % items.length;
+      loadVideo(nextIndex, true);
+    });
+  }
+
+  // Cargar el primer video al inicio
+  loadVideo(0, false);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
@@ -741,4 +793,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const exerciseId = getExerciseId();
   updateStatsPanel(exerciseId);
+
+  initVideoPlaylist();
 });

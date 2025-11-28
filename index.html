@@ -382,121 +382,103 @@
       </section>
     </section>
 
-    <!-- SECCIÓN VIDEOS -->
-    <section id="videos" class="section">
-      <h2>Videos</h2>
-      <p class="card-info">
-        A continuación se presentan varios videos seleccionados que abordan
-        conceptos y ejemplos prácticos relacionados con las pérdidas de
-        carga en tuberías en serie.
-      </p>
+   <!-- SECCIÓN VIDEOS -->
+<section id="videos" class="section">
+  <h2>Videos</h2>
+  <p class="card-info">
+    A continuación se presentan varios videos seleccionados que abordan
+    conceptos y ejemplos prácticos relacionados con las pérdidas de
+    carga en tuberías en serie.
+  </p>
 
-      <div class="video-grid">
-        <article class="video-card">
-          <h3>Video – Conceptos basicos </h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://www.youtube.com/watch?v=yvT5sqjk-HE&list=PLM6aCBSJNBRZDolha44uIjYyH_AfSJ3i4&index=1"
-              title="Video 1 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </article>
-
-        <article class="video-card">
-          <h3>Ejercicio 1</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/Tzzp9svKZh8?si=QdqHRGWQkH8HrJze"
-              title="Video 2 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </article>
-
-        <article class="video-card">
-          <h3>Ejercicio 2</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/2VuvUXAdyrQ?si=fi-jspPvpeSOq4JB"
-              title="Video 3 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </article>
+  <div class="video-layout">
+    <!-- Reproductor principal grande -->
+    <div class="video-main">
+      <div class="video-wrapper video-wrapper-large">
+        <iframe
+          id="mainVideoPlayer"
+          src="https://www.youtube.com/embed/yvT5sqjk-HE"
+          title="HidraSeries - Reproductor principal"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
-    </section>
-  </main>
 
-          <article class="video-card">
-          <h3>Ejercicio 3</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/EKvCY27KxQk?si=N-JEsL2A3uqFmSPs"
-              title="Video 4 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </article>
+      <div class="video-main-controls">
+        <button type="button" id="prevVideoBtn" class="btn-secondary">
+          ◀ Anterior
+        </button>
+        <button type="button" id="nextVideoBtn" class="btn-secondary">
+          Siguiente ▶
+        </button>
       </div>
-    </section>
-  </main>
+    </div>
 
-            <article class="video-card">
-          <h3>Ejercicio 4</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/LFEXXBUKidc?si=NBoqn47FHpDoR7eG"
-              title="Video 5 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+    <!-- Lista / playlist de videos -->
+    <aside class="video-playlist">
+      <h3>Lista de reproducción</h3>
+      <ul id="videoPlaylist" class="video-list">
+        <li class="video-item active" data-video-id="yvT5sqjk-HE">
+          <span class="video-index">1</span>
+          <div class="video-meta">
+            <strong>Conceptos básicos</strong>
+            <small>Introducción general a las pérdidas de carga y tuberías en serie.</small>
           </div>
-        </article>
-      </div>
-    </section>
-  </main>
+        </li>
 
-              <article class="video-card">
-          <h3>Ejercicio 5</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/SPuuZ_67AbU?si=97w4lkUPoC4yxyNN"
-              title="Video 6 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+        <li class="video-item" data-video-id="Tzzp9svKZh8">
+          <span class="video-index">2</span>
+          <div class="video-meta">
+            <strong>Ejercicio 1</strong>
+            <small>Resolución paso a paso de un problema típico de pérdidas.</small>
           </div>
-        </article>
-      </div>
-    </section>
-  </main>
+        </li>
 
-              <article class="video-card">
-          <h3>Ejercicio 6</h3>
-          <div class="video-wrapper">
-            <iframe
-              src="https://youtu.be/TE1-n74Kl8M?si=d2HU1ZRy9Ebsw6xg"
-              title="Video 7 HidraSeries"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+        <li class="video-item" data-video-id="2VuvUXAdyrQ">
+          <span class="video-index">3</span>
+          <div class="video-meta">
+            <strong>Ejercicio 2</strong>
+            <small>Ejercicio adicional para reforzar el análisis de tuberías en serie.</small>
           </div>
-        </article>
-      </div>
-    </section>
-  </main>
+        </li>
+
+        <li class="video-item" data-video-id="EKvCY27KxQk">
+          <span class="video-index">4</span>
+          <div class="video-meta">
+            <strong>Ejercicio 3</strong>
+            <small>Aplicación de la ecuación de Darcy–Weisbach en sistemas compuestos.</small>
+          </div>
+        </li>
+
+        <li class="video-item" data-video-id="LFEXXBUKidc">
+          <span class="video-index">5</span>
+          <div class="video-meta">
+            <strong>Ejercicio 4</strong>
+            <small>Caso práctico con varios accesorios y pérdidas menores.</small>
+          </div>
+        </li>
+
+        <li class="video-item" data-video-id="SPuuZ_67AbU">
+          <span class="video-index">6</span>
+          <div class="video-meta">
+            <strong>Ejercicio 5</strong>
+            <small>Evaluación comparativa de diferentes configuraciones de tuberías.</small>
+          </div>
+        </li>
+
+        <li class="video-item" data-video-id="TE1-n74Kl8M">
+          <span class="video-index">7</span>
+          <div class="video-meta">
+            <strong>Ejercicio 6</strong>
+            <small>Ejemplo final integrando pérdidas mayores y menores.</small>
+          </div>
+        </li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
 
   <footer class="main-footer">
     <p>HidraSeries &copy; 2025 – Mecanica de fluidos Proyect</p>
