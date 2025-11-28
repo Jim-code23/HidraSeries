@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>HidraSeries – Pérdidas en tuberías en serie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="HidraSeries: plataforma interactiva para estudiar y calcular pérdidas de carga en tuberías en serie, con teoría, calculadora y videos."
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-light">
+  <header class="main-header">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="20" class="logo-circle" />
+        <path
+          class="logo-drop"
+          d="M24 11 C21 16 18 19.5 18 24.5 C18 28.6 20.9 31.5 24 31.5 C27.1 31.5 30 28.6 30 24.5 C30 19.5 27 16 24 11 Z"
+        />
+        <path
+          class="logo-wave"
+          d="M14 34 C17 31.5 21 31.5 24 33 C27 34.5 31 34.5 34 33"
+          fill="none"
+          stroke-width="2"
+        />
+      </svg>
+      <div class="logo-text">
+        Hidra<span>Series</span>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <button class="nav-link" data-scroll="#theory">Teoría</button>
+      <button class="nav-link" data-scroll="#calculator">Calculadora</button>
+      <button class="nav-link" data-scroll="#videos">Videos</button>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+      <span class="icon">🌞</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- BANNER PRINCIPAL -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>HidraSeries</h1>
+        <p>
+          Construye tu propia línea de tuberías en serie, calcula pérdidas de carga
+          y evalúa tu resultado como si fuera un quiz interactivo.
+        </p>
+      </div>
+
+      <div class="hero-grid">
+        <article class="hero-card" data-scroll="#theory">
+          <h2>Teoría</h2>
+          <p>
+            Conceptos clave de pérdidas mayores y menores, Darcy–Weisbach,
+            factor de fricción y tuberías en serie.
+          </p>
+          <span class="hero-cta">Ir a teoría</span>
+        </article>
+
+        <article class="hero-card" data-scroll="#calculator">
+          <h2>Calculadora</h2>
+          <p>
+            Arma el sistema: selección de schedule/diámetro, materiales, longitudes,
+            accesorios y válvulas. Recibe retroalimentación por colores.
+          </p>
+          <span class="hero-cta">Ir a calculadora</span>
+        </article>
+
+        <article class="hero-card" data-scroll="#videos">
+          <h2>Videos</h2>
+          <p>
+            Colección de videos seleccionados sobre pérdidas de energía en tuberías
+            y resolución de problemas típicos.
+          </p>
+          <span class="hero-cta">Ver videos</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN TEORÍA -->
+    <section id="theory" class="section">
+      <h2 class="theory-title">Fundamentos teóricos</h2>
+
+      <div class="theory-grid">
+
+        <!-- Pérdidas mayores -->
+        <article class="theory-card">
+          <h3>Pérdidas mayores – Ecuación de Darcy–Weisbach</h3>
+          <p>
+            Las pérdidas de energía por fricción en un tramo recto de tubería se
+            calculan mediante la siguiente ecuación:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main">
+              h<sub>f</sub> = f ·
+              <span class="frac">
+                <span class="num">L</span>
+                <span class="den">D</span>
+              </span>
+              ·
+              <span class="frac">
+                <span class="num">V²</span>
+                <span class="den">2 g</span>
+              </span>
+            </span>
+          </div>
+
+          <ul class="vars">
+            <li><b>h<sub>f</sub></b>: pérdida de carga por fricción [m]</li>
+            <li><b>f</b>: factor de fricción de Darcy [-]</li>
+            <li><b>L</b>: longitud del tramo de tubería [m]</li>
+            <li><b>D</b>: diámetro interno de la tubería [m]</li>
+            <li><b>V</b>: velocidad media del fluido [m/s]</li>
+          </ul>
+        </article>
+
+        <!-- Número de Reynolds y factor de fricción -->
+        <article class="theory-card">
+          <h3>Número de Reynolds y factor de fricción</h3>
+
+          <p>
+            El régimen de flujo se caracteriza por el número de Reynolds:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main">
+              Re =
+              <span class="frac">
+                <span class="num">V · D</span>
+                <span class="den">ν</span>
+              </span>
+            </span>
+          </div>
+
+          <p>
+            Para flujo laminar (Re &lt; 2300) el factor de fricción se obtiene de:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main">
+              f =
+              <span class="frac">
+                <span class="num">64</span>
+                <span class="den">Re</span>
+              </span>
+            </span>
+          </div>
+
+          <p>
+            Para flujo turbulento en tuberías rugosas se emplea, de forma aproximada,
+            la ecuación explícita de Swamee–Jain:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main eq-small">
+              f = 0.25 /
+              &#91; log<sub>10</sub>(
+              <span class="frac">
+                <span class="num">ε / D</span>
+                <span class="den">3.7</span>
+              </span>
+              +
+              <span class="frac">
+                <span class="num">5.74</span>
+                <span class="den">Re<sup>0.9</sup></span>
+              </span>
+              ) &#93;²
+            </span>
+          </div>
+        </article>
+
+        <!-- Pérdidas menores -->
+        <article class="theory-card">
+          <h3>Pérdidas menores – accesorios y válvulas</h3>
+          <p>
+            Las pérdidas localizadas producidas por codos, tees, cambios bruscos
+            de sección y válvulas se modelan con:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main">
+              h<sub>m</sub> = K ·
+              <span class="frac">
+                <span class="num">V²</span>
+                <span class="den">2 g</span>
+              </span>
+            </span>
+          </div>
+
+          <p>
+            donde <b>K</b> es el coeficiente de pérdida asociado a cada accesorio,
+            determinado a partir de tablas o catálogos.
+          </p>
+        </article>
+
+        <!-- Tuberías en serie -->
+        <article class="theory-card">
+          <h3>Tuberías en serie</h3>
+
+          <p>
+            Cuando varios tramos de tubería se conectan en serie, el caudal es el
+            mismo en todos ellos y la pérdida de carga total se obtiene sumando
+            las pérdidas mayores y menores de cada elemento:
+          </p>
+
+          <div class="equation-block">
+            <span class="eq-main">
+              h<sub>L,total</sub> =
+              Σ h<sub>f,i</sub> + Σ h<sub>m,j</sub>
+            </span>
+          </div>
+
+          <p>
+            Es posible representar el sistema mediante una tubería equivalente
+            que produzca la misma pérdida de energía para el mismo caudal.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN CALCULADORA / QUIZ -->
+    <section id="calculator" class="section">
+      <h2>Calculadora – Tuberías en serie (modo quiz)</h2>
+
+      <!-- Paso 1: Datos del fluido -->
+      <section class="card">
+        <h3>Paso 1 – Datos del fluido y caudal</h3>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fluidDensity">
+              Densidad ρ [kg/m³]
+              <span class="hint">Ejemplo: agua ≈ 998</span>
+            </label>
+            <input id="fluidDensity" type="number" step="0.1" value="998" />
+          </div>
+          <div class="form-field">
+            <label for="fluidNu">
+              Viscosidad cinemática ν [m²/s]
+              <span class="hint">Ejemplo: agua 20 °C ≈ 1e-6</span>
+            </label>
+            <input id="fluidNu" type="number" step="1e-7" value="1e-6" />
+          </div>
+          <div class="form-field">
+            <label for="flowRate">
+              Caudal Q [m³/s]
+              <span class="hint">Introduce el caudal del problema</span>
+            </label>
+            <input id="flowRate" type="number" step="0.000001" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 2: Tramos en serie -->
+      <section class="card">
+        <h3>Paso 2 – Tramos de tubería en serie</h3>
+        <p class="card-info">
+          Puedes definir varios tramos con distinto material, schedule/diámetro y longitud.
+          Las dimensiones de tubería Schedule 40 se basan en tablas ANSI reales.
+        </p>
+
+        <!-- Controles para longitud total y número de tramos -->
+        <div class="form-grid" style="margin-top: 0.5rem;">
+          <div class="form-field">
+            <label for="targetLength">
+              Longitud total de la tubería a crear [m] (opcional)
+            </label>
+            <input id="targetLength" type="number" step="0.01" placeholder="Ej: 120" />
+            <span class="hint" id="lengthHint">
+              Suma actual de longitudes de los tramos: 0.00 m
+            </span>
+          </div>
+          <div class="form-field">
+            <label>&nbsp;</label>
+            <button id="configureSegmentsBtn" type="button" class="btn-secondary">
+              Definir número de tramos
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Material</th>
+                <th>Modo diámetro</th>
+                <th>Schedule 40 (NPS)</th>
+                <th>Diámetro interno directo D [m]</th>
+                <th>Longitud L [m]</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="segmentsBody">
+              <!-- filas se insertan por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button id="addSegmentBtn" type="button" class="btn-secondary">
+            + Agregar tramo
+          </button>
+        </div>
+      </section>
+
+      <!-- Paso 3: Accesorios y válvulas -->
+      <section class="card">
+        <h3>Paso 3 – Accesorios y válvulas</h3>
+        <p class="card-info">
+          Los coeficientes K son valores típicos de literatura para accesorios
+          completamente abiertos (globo, compuerta, codos, etc.).
+        </p>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Tramo asociado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="accessoriesBody">
+            </tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button id="addAccessoryBtn" type="button" class="btn-secondary">
+            + Agregar accesorio / válvula
+          </button>
+        </div>
+      </section>
+
+      <!-- Paso 4: Quiz y resultado -->
+      <section class="card">
+        <h3>Paso 4 – Responde el ejercicio</h3>
+        <p>
+          Con los datos anteriores, calcula por tu cuenta la pérdida de carga
+          total del sistema (mayores + menores) y escríbela aquí. La página
+          calculará el resultado real y comparará tu respuesta, pero solo
+          después de que la introduzcas.
+        </p>
+
+        <div class="quiz-grid">
+          <div class="form-field">
+            <label for="userHeadLoss">
+              Tu respuesta para la pérdida de carga total
+              h<sub>L,total</sub> [m]
+            </label>
+            <input id="userHeadLoss" type="number" step="0.0001" />
+          </div>
+          <div class="form-field">
+            <button id="gradeBtn" type="button" class="btn-primary">
+              Calificar ejercicio
+            </button>
+          </div>
+        </div>
+
+        <div id="resultPanel" class="result-panel hidden">
+          <div class="result-badge" id="resultBadge"></div>
+          <div class="result-details" id="resultDetails"></div>
+        </div>
+
+        <div id="statsPanel" class="stats-panel hidden">
+          <h4>Estadísticas del ejercicio (datos locales)</h4>
+          <p id="statsSummary"></p>
+          <ul class="stats-list">
+            <li><span class="pill pill-green"></span> Verde: <span id="statsGreen">0</span></li>
+            <li><span class="pill pill-yellow"></span> Amarillo: <span id="statsYellow">0</span></li>
+            <li><span class="pill pill-red"></span> Rojo: <span id="statsRed">0</span></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <!-- SECCIÓN VIDEOS -->
+    <section id="videos" class="section">
+      <h2>Videos</h2>
+      <p class="card-info">
+        Aquí irán los videos de YouTube que tú definas para el curso (pérdidas
+        en tuberías, ejemplos resueltos, teoría complementaria). Cuando tengas
+        los enlaces, solo tendrás que reemplazar los <code>src</code> de los
+        iframes.
+      </p>
+
+      <div class="video-grid">
+        <article class="video-card">
+          <h3>Video 1 – Pérdidas mayores y menores</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_1"
+              title="Video 1 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <h3>Video 2 – Tuberías en serie</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_2"
+              title="Video 2 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <h3>Video 3 – Ejemplo de cálculo completo</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_3"
+              title="Video 3 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p>HidraSeries &copy; 2025 – Pérdidas en tuberías en serie</p>
+  </footer>
+
+  <template id="segment-row-template">
+    <tr class="segment-row">
+      <td class="row-index"></td>
+      <td>
+        <select class="material-select">
+          <option value="steel">Acero comercial (ε ≈ 0.045 mm)</option>
+          <option value="pvc">PVC liso (ε ≈ 0.0015 mm)</option>
+        </select>
+      </td>
+      <td>
+        <select class="diameter-mode">
+          <option value="schedule">Schedule 40 (NPS)</option>
+          <option value="direct">Diámetro directo</option>
+        </select>
+      </td>
+      <td>
+        <select class="nps-select">
+          <option value="1">1"</option>
+          <option value="1.5">1 1/2"</option>
+          <option value="2" selected>2"</option>
+          <option value="2.5">2 1/2"</option>
+          <option value="3">3"</option>
+        </select>
+      </td>
+      <td>
+        <input class="diameter-input" type="number" step="0.0001" placeholder="D [m]" disabled />
+      </td>
+      <td>
+        <input class="length-input" type="number" step="0.01" placeholder="L [m]" />
+      </td>
+      <td>
+        <button type="button" class="btn-icon btn-remove-row" title="Eliminar tramo">&times;</button>
+      </td>
+    </tr>
+  </template>
+
+  <template id="accessory-row-template">
+    <tr class="accessory-row">
+      <td class="row-index"></td>
+      <td>
+        <select class="accessory-type">
+          <option value="elbow90">Codo 90° estándar</option>
+          <option value="elbow45">Codo 45°</option>
+          <option value="tee_run">Tee (flujo en línea)</option>
+          <option value="tee_branch">Tee (derivación)</option>
+          <option value="globe_valve">Válvula globo (abierta)</option>
+          <option value="gate_valve">Válvula compuerta (abierta)</option>
+          <option value="sudden_contraction">Contracción súbita</option>
+          <option value="sudden_expansion">Expansión súbita</option>
+        </select>
+      </td>
+      <td>
+        <input class="accessory-count" type="number" step="1" min="1" value="1" />
+      </td>
+      <td>
+        <select class="accessory-segment">
+        </select>
+      </td>
+      <td>
+        <button type="button" class="btn-icon btn-remove-row" title="Eliminar accesorio">
+          &times;
+        </button>
+      </td>
+    </tr>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
