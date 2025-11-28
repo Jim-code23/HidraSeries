@@ -1,24 +1,87 @@
 const G = 9.81;
 
-// Datos de materiales
+// Datos de materiales (ε en metros)
+// Valores típicos tomados de tablas de rugosidad absoluta para tuberías nuevas
 const MATERIALS = {
   steel: {
-    name: "Acero comercial",
-    epsilon: 0.000045
+    name: "Acero comercial (acero al carbono)",
+    epsilon: 0.000045   // 0.045 mm
+  },
+  stainless: {
+    name: "Acero inoxidable",
+    epsilon: 0.000015   // 0.015 mm
   },
   pvc: {
     name: "PVC liso",
+    epsilon: 0.0000015  // 0.0015 mm
+  },
+  cpvc: {
+    name: "CPVC",
+    epsilon: 0.0000015
+  },
+  pe: {
+    name: "Polietileno (PE)",
+    epsilon: 0.000007
+  },
+  copper: {
+    name: "Cobre",
+    epsilon: 0.0000015
+  },
+  castiron: {
+    name: "Hierro fundido (nuevo, revestido)",
+    epsilon: 0.00012
+  },
+  aluminum: {
+    name: "Aluminio",
     epsilon: 0.0000015
   }
 };
 
-// Diámetros internos típicos para tubería Schedule 40 (pulgadas)
-const SCHEDULE40_ID_INCHES = {
-  "1": 1.049,
-  "1.5": 1.61,
-  "2": 2.067,
-  "2.5": 2.469,
-  "3": 3.068
+// Diámetros internos típicos para tubería de acero (en metros)
+const SCHEDULE_ID_M = {
+  schedule40: {
+    "0.125": 0.0068326,  // 1/8"
+    "0.25":  0.0092456,  // 1/4"
+    "0.375": 0.0125222,  // 3/8"
+    "0.5":   0.0157988,  // 1/2"
+    "0.75":  0.0209296,  // 3/4"
+    "1":     0.0266446,  // 1"
+    "1.25":  0.0350520,  // 1 1/4"
+    "1.5":   0.0408940,  // 1 1/2"
+    "2":     0.0525018,  // 2"
+    "2.5":   0.0627126,  // 2 1/2"
+    "3":     0.0779272,  // 3"
+    "4":     0.1022604,  // 4"
+    "5":     0.1281938,  // 5"
+    "6":     0.1540510,  // 6"
+    "8":     0.2027174,  // 8"
+    "10":    0.2545080,  // 10"
+    "12":    0.3048000   // 12"
+  },
+  schedule60: {
+    "8":  0.1984502,     // 8"
+    "10": 0.2476500,     // 10"
+    "12": 0.2953004      // 12"
+  },
+  schedule80: {
+    "0.125": 0.0054610,  // 1/8"
+    "0.25":  0.0076708,  // 1/4"
+    "0.375": 0.0107442,  // 3/8"
+    "0.5":   0.0138684,  // 1/2"
+    "0.75":  0.0188468,  // 3/4"
+    "1":     0.0243078,  // 1"
+    "1.25":  0.0324612,  // 1 1/4"
+    "1.5":   0.0381000,  // 1 1/2"
+    "2":     0.0492506,  // 2"
+    "2.5":   0.0590042,  // 2 1/2"
+    "3":     0.0736600,  // 3"
+    "4":     0.0971804,  // 4"
+    "5":     0.1222502,  // 5"
+    "6":     0.1463294,  // 6"
+    "8":     0.1936750,  // 8"
+    "10":    0.2476500,  // 10"
+    "12":    0.2984500   // 12"
+  }
 };
 
 function inchesToMeters(inches) {
@@ -29,8 +92,8 @@ function inchesToMeters(inches) {
 const ACCESSORY_TYPES = {
   elbow90: { label: "Codo 90° estándar", K: 0.95 },
   elbow45: { label: "Codo 45°", K: 0.4 },
-  tee_run: { label: "Tee (flujo en línea)", K: 0.6 },
-  tee_branch: { label: "Tee (derivación)", K: 1.8 },
+  tee_run: { label: "T (flujo en línea)", K: 0.6 },
+  tee_branch: { label: "T (derivación)", K: 1.8 },
   globe_valve: { label: "Válvula globo (abierta)", K: 10.0 },
   gate_valve: { label: "Válvula compuerta (abierta)", K: 0.2 },
   sudden_contraction: { label: "Contracción súbita", K: 0.5 },
@@ -124,6 +187,37 @@ function computeDarcyFrictionFactor(Re, epsilon, D) {
   return f;
 }
 
+// Devuelve el diámetro interno [m] según schedule o diámetro directo
+function getInnerDiameterMetersForRow(row) {
+  const mode = row.querySelector(".diameter-mode").value;
+
+  // Modo: diámetro directo digitado por el usuario
+  if (mode === "direct") {
+    const dInput = row.querySelector(".diameter-input");
+    const dUser = Number(dInput ? dInput.value : 0);
+    if (!dUser || dUser <= 0) return null;
+    return dUser; // ya en metros
+  }
+
+  // Modo: Schedule (40, 60, 80)
+  const nps = row.querySelector(".nps-select").value;  // ej: "2", "1.5", "0.375"
+  const table = SCHEDULE_ID_M[mode];
+
+  if (!table) return null;
+
+  const d = table[nps];
+
+  // Si no hay datos para ese NPS + schedule
+  if (typeof d !== "number" || d <= 0) {
+    throw new Error(
+      `No hay datos de diámetro interno para NPS ${nps}" en ${mode}. ` +
+      `Usa un schedule distinto (40 u 80) o modo "Diámetro directo".`
+    );
+  }
+
+  return d;
+}
+
 function computeSystemLosses() {
   const rho = Number(document.getElementById("fluidDensity").value);
   const nu = Number(document.getElementById("fluidNu").value);
@@ -141,28 +235,15 @@ function computeSystemLosses() {
   const segments = [];
   segmentRows.forEach((row, idx) => {
     const materialKey = row.querySelector(".material-select").value;
-    const mode = row.querySelector(".diameter-mode").value;
-    const nps = row.querySelector(".nps-select").value;
-    const dInput = row.querySelector(".diameter-input");
     const L = Number(row.querySelector(".length-input").value);
 
     if (!L || L <= 0) {
       throw new Error(`La longitud del tramo ${idx + 1} debe ser positiva.`);
     }
 
-    let Dm;
-
-    if (mode === "schedule") {
-      const idInches = SCHEDULE40_ID_INCHES[nps];
-      if (!idInches) {
-        throw new Error(`NPS inválido en tramo ${idx + 1}.`);
-      }
-      Dm = inchesToMeters(idInches);
-    } else {
-      Dm = Number(dInput.value);
-      if (!Dm || Dm <= 0) {
-        throw new Error(`El diámetro directo del tramo ${idx + 1} debe ser positivo.`);
-      }
+    const Dm = getInnerDiameterMetersForRow(row);
+    if (!Dm || Dm <= 0) {
+      throw new Error(`No se pudo determinar el diámetro interno en el tramo ${idx + 1}.`);
     }
 
     const mat = MATERIALS[materialKey];
@@ -531,16 +612,16 @@ function attachEventListeners() {
       const npsSelect = row.querySelector(".nps-select");
       const dInput = row.querySelector(".diameter-input");
 
-      if (mode === "schedule") {
+      if (mode === "direct") {
+        if (npsSelect) npsSelect.disabled = true;
+        if (dInput) {
+          dInput.disabled = false;
+        }
+      } else {
         if (npsSelect) npsSelect.disabled = false;
         if (dInput) {
           dInput.disabled = true;
           dInput.value = "";
-        }
-      } else {
-        if (npsSelect) npsSelect.disabled = true;
-        if (dInput) {
-          dInput.disabled = false;
         }
       }
     }

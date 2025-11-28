@@ -36,7 +36,7 @@
       <button class="nav-link" data-scroll="#videos">Videos</button>
     </nav>
     <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
-      <span class="icon">🌞</span>
+      <span class="icon">MODO</span>
     </button>
   </header>
 
@@ -112,7 +112,7 @@
 
           <ul class="vars">
             <li><b>h<sub>f</sub></b>: pérdida de carga por fricción [m]</li>
-            <li><b>f</b>: factor de fricción de Darcy [-]</li>
+            <li><b>f</b>: factor de fricción</li>
             <li><b>L</b>: longitud del tramo de tubería [m]</li>
             <li><b>D</b>: diámetro interno de la tubería [m]</li>
             <li><b>V</b>: velocidad media del fluido [m/s]</li>
@@ -386,18 +386,17 @@
     <section id="videos" class="section">
       <h2>Videos</h2>
       <p class="card-info">
-        Aquí irán los videos de YouTube que tú definas para el curso (pérdidas
-        en tuberías, ejemplos resueltos, teoría complementaria). Cuando tengas
-        los enlaces, solo tendrás que reemplazar los <code>src</code> de los
-        iframes.
+        A continuación se presentan varios videos seleccionados que abordan
+        conceptos y ejemplos prácticos relacionados con las pérdidas de
+        carga en tuberías en serie.
       </p>
 
       <div class="video-grid">
         <article class="video-card">
-          <h3>Video 1 – Pérdidas mayores y menores</h3>
+          <h3>Video – Conceptos basicos </h3>
           <div class="video-wrapper">
             <iframe
-              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_1"
+              src="https://www.youtube.com/watch?v=yvT5sqjk-HE&list=PLM6aCBSJNBRZDolha44uIjYyH_AfSJ3i4&index=1"
               title="Video 1 HidraSeries"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -407,10 +406,10 @@
         </article>
 
         <article class="video-card">
-          <h3>Video 2 – Tuberías en serie</h3>
+          <h3>Ejercicio 1</h3>
           <div class="video-wrapper">
             <iframe
-              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_2"
+              src="https://youtu.be/Tzzp9svKZh8?si=QdqHRGWQkH8HrJze"
               title="Video 2 HidraSeries"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -420,10 +419,10 @@
         </article>
 
         <article class="video-card">
-          <h3>Video 3 – Ejemplo de cálculo completo</h3>
+          <h3>Ejercicio 2</h3>
           <div class="video-wrapper">
             <iframe
-              src="https://www.youtube.com/embed/EL_ID_DEL_VIDEO_3"
+              src="https://youtu.be/2VuvUXAdyrQ?si=fi-jspPvpeSOq4JB"
               title="Video 3 HidraSeries"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -435,8 +434,72 @@
     </section>
   </main>
 
+          <article class="video-card">
+          <h3>Ejercicio 3</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtu.be/EKvCY27KxQk?si=N-JEsL2A3uqFmSPs"
+              title="Video 4 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+            <article class="video-card">
+          <h3>Ejercicio 4</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtu.be/LFEXXBUKidc?si=NBoqn47FHpDoR7eG"
+              title="Video 5 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+              <article class="video-card">
+          <h3>Ejercicio 5</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtu.be/SPuuZ_67AbU?si=97w4lkUPoC4yxyNN"
+              title="Video 6 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+              <article class="video-card">
+          <h3>Ejercicio 6</h3>
+          <div class="video-wrapper">
+            <iframe
+              src="https://youtu.be/TE1-n74Kl8M?si=d2HU1ZRy9Ebsw6xg"
+              title="Video 7 HidraSeries"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
   <footer class="main-footer">
-    <p>HidraSeries &copy; 2025 – Pérdidas en tuberías en serie</p>
+    <p>HidraSeries &copy; 2025 – Mecanica de fluidos Proyect</p>
   </footer>
 
   <template id="segment-row-template">
@@ -444,23 +507,44 @@
       <td class="row-index"></td>
       <td>
         <select class="material-select">
-          <option value="steel">Acero comercial (ε ≈ 0.045 mm)</option>
-          <option value="pvc">PVC liso (ε ≈ 0.0015 mm)</option>
+          <option value="steel">Acero comercial</option>
+          <option value="pvc">PVC liso</option>
+          <option value="pvc">Polietileno</option>
+          <option value="pvc">Cobre</option>
+          <option value="pvc">Hierro fundido</option>
+          <option value="pvc">CPVC</option>
+          <option value="pvc">Acero inoxidable</option>
+          <option value="pvc">Aluminio</option>
         </select>
       </td>
       <td>
         <select class="diameter-mode">
-          <option value="schedule">Schedule 40 (NPS)</option>
+          <option value="schedule">Schedule 40</option>
+          <option value="schedule">Schedule 40</option>
+          <option value="schedule">Schedule 60</option>
+          <option value="schedule">Schedule 80</option>
           <option value="direct">Diámetro directo</option>
         </select>
       </td>
       <td>
         <select class="nps-select">
+          <option value="0.125">1/8"</option>
+          <option value="0.25">1/4"</option>
+          <option value="0.375">3/8"</option>
+          <option value="0.5">1/2"</option>
+          <option value="0.75">3/4"</option>
           <option value="1">1"</option>
+          <option value="1.25">1 1/4"</option>
           <option value="1.5">1 1/2"</option>
+          
           <option value="2" selected>2"</option>
           <option value="2.5">2 1/2"</option>
           <option value="3">3"</option>
+          <option value="4">4"</option>
+          <option value="6">6"</option>
+          <option value="8">8"</option>
+          <option value="10">10"</option>
+          <option value="12">12"</option>
         </select>
       </td>
       <td>
